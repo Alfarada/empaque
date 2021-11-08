@@ -1,0 +1,15 @@
+
+# restringiendo acceso a todos los directorios
+
+
+# pagina de inicio por defecto
+DirectoryIndex index.php
+
+#  mensaje error 404
+ErrorDocument 404 /login2/notfound.php
+
+# mensaje error del servidor 500
+ErrorDocument 500 /login2/internalerror.php
+
+# mensaje de acceso prohibido 
+ErrorDocument 403 /login2/forbidden.php

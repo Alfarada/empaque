@@ -129,6 +129,10 @@
                     <div class="card container-table show col s12 l8 offset-l1">
                         <span class="table_title">
                             <h4>Tabla de registros</h4>
+                            <section class="row section_table">
+                                <article class="col s6"><a href="#!" class="flow-text">Logo</a></article>
+                                <article class="col s6"><a href="#!" class="flow-text">Sin Logo</a></article>
+                            </section>
                         </span>
                         <table class="crud_table centered responsive-table">
                             <thead>

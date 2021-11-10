@@ -7,51 +7,33 @@ html {
 }
 
 #scale-demo {
-  /* display: none; */
   position: fixed;
   z-index: 999;
-  /* bottom: 4vh; */
   top: 85vh;
   right: 4vw;
-  /* width: 4rem; */
 }
 
 .crud_form {
   margin-bottom: 3rem;
 }
 
-/* ============= Botones ==============*/
+/* ============= Buttons ==============*/
 
-/* button > .btn-reset{
-  display: none;
-} */
 .btn-reset {
   width: 100%;
   margin-bottom: 1.5rem;
 }
 
- td > a > i.small.material-icons.edit,
- i.small.material-icons.delete-icon   {
+td > a > i.small.material-icons.edit,
+i.small.material-icons.delete-icon {
   display: inline;
 }
-/* .remove-edition {
-  display: none;
-  width: 100%;
-  margin-bottom: 1.5rem;
-}
-.scale-out {
-  display: block;
-  width: 100%;
-  margin-bottom: 1.5rem;
-} */
 
 .delete-icon {
-  /* display: block; */
   color: #2196f3;
 }
 
 .edit {
-  /* display: block; */
   margin-bottom: 20px;
   color: #2196f3;
 }
@@ -63,8 +45,39 @@ html {
 }
 /* ================================== */
 
+/* ============= Enlaces =============*/
+
+/* section.section_table {
+  display: block;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  font-weight: 550;
+  font-size: 25px;
+} */
+
+/* section.section_table {
+  height: 2rem;
+} */
+
+section.section_table article {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section.section_table article:first-child {
+  background-color: #2196f3;
+}
+
+section.section_table article:first-child a {
+  color: white;
+}
+
+/* ==================================*/
+
 .table_title {
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 }
 
 .errors ul > li {
@@ -79,16 +92,6 @@ html {
 .container-register {
   height: 100vh !important;
 }
-
-/* .register_text {
-    margin-top: 3rem;
-} */
-
-/* hr {
-    height: 5px;
-    border: none;
-    background-color: #2196f3;
-} */
 
 .alert-container {
   margin-bottom: 20px;
@@ -117,10 +120,8 @@ html {
 .row > div.container {
   width: 85%;
 }
-/* principal container */
 
 .table_title > h4 {
-  /* padding-top: 2rem; */
   padding-bottom: 1rem;
 }
 
@@ -140,5 +141,3 @@ html {
   padding-top: 1rem;
   padding-bottom: 2rem;
 }
-
-/* close empty database notice */

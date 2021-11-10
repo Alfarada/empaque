@@ -311,3 +311,11 @@ const calHandler = (e) => {
 };
 
 // ============  real-time calculator in the form =============
+
+// TODO !
+document.addEventListener("click", (e) => {
+
+  if (e.target.matches(".section_table article")) {
+    console.log(e.target, 'entró en el condicional');
+  }
+});

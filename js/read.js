@@ -31,7 +31,6 @@ const responseHandler = (res) => {
     return error(res);
   }
 
-  console.log('renderiza todos los elementos');
   renderElements(res);
 };
 
@@ -66,7 +65,7 @@ const showNotice = () => {
     $cardNotice.classList.remove("hide");           // show card
     $table.classList.add("hide");                   // hide table
 
-    // show card with short description
+    // and with short description
     // when database is empty
     $cardDescription.classList.remove("hide");
 
@@ -75,7 +74,7 @@ const showNotice = () => {
     $cardNotice.classList.remove("hide");           // show card
     $table.classList.add("hide");                   // hide table
 
-    // show card with short description
+    // with short description
     // when database is empty
     $cardDescription.classList.remove("hide");
   }

@@ -43,21 +43,7 @@ i.small.material-icons.delete-icon {
   margin-bottom: 1.5rem;
   width: 100%;
 }
-/* ================================== */
 
-/* ============= Enlaces =============*/
-
-/* section.section_table {
-  display: block;
-  justify-content: space-around;
-  margin-bottom: 25px;
-  font-weight: 550;
-  font-size: 25px;
-} */
-
-/* section.section_table {
-  height: 2rem;
-} */
 
 section.section_table article {
   height: 4rem;
@@ -66,19 +52,24 @@ section.section_table article {
   align-items: center;
 }
 
-section.section_table article:first-child {
+/* section.section_table article:first-child {
   background-color: #2196f3;
 }
 
-section.section_table article:first-child a {
+section.section_table article:first-child p {
+  color: white;
+} */
+
+.is-actived {
+  background-color: #2196f3;
   color: white;
 }
 
 /* ==================================*/
 
-.table_title {
+/* .table_title { */
   /* margin-bottom: 3rem; */
-}
+/* } */
 
 .errors ul > li {
   font-weight: 500;

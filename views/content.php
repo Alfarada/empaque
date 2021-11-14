@@ -130,8 +130,8 @@
                         <span class="table_title">
                             <h4>Tabla de registros</h4>
                             <section class="row section_table">
-                                <article class="col s6"><a href="#!" class="flow-text">Logo</a></article>
-                                <article class="col s6"><a href="#!" class="flow-text">Sin Logo</a></article>
+                                <article class="btn-logo col s6 is-actived"><p class="flow-text">Con logo</p></article>
+                                <article class="btn-without-logo blue-text col s6"><p class="flow-text">Sin logo</p></article>
                             </section>
                         </span>
                         <table class="crud_table centered responsive-table">

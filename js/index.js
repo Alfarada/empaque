@@ -315,7 +315,32 @@ const calHandler = (e) => {
 // TODO !
 document.addEventListener("click", (e) => {
 
-  if (e.target.matches(".section_table article")) {
-    console.log(e.target, 'entró en el condicional');
+  let $btnWithOutLogo = document.querySelector('.section_table').lastElementChild,
+    $btnLogo = document.querySelector('.section_table').firstElementChild;
+
+  const BTN_LOGO = '.btn-logo',
+    BTN_WITHOUT_LOGO = '.btn-without-logo';
+
+  // if the user clicks on the button " without logo "
+  if (e.target.matches(BTN_WITHOUT_LOGO) || e.target.matches(`${BTN_WITHOUT_LOGO} *`)) {
+
+    $btnWithOutLogo.classList.add("is-actived");
+    $btnWithOutLogo.classList.remove("blue-text");
+
+    $btnLogo.classList.remove("is-actived");
+    $btnLogo.classList.add("blue-text");
+
   }
+
+  // if the user clicks on the button " with logo "
+  if (e.target.matches(BTN_LOGO) || e.target.matches(`${BTN_LOGO} *`)) {
+
+    $btnWithOutLogo.classList.remove('is-actived');
+    $btnWithOutLogo.classList.add('blue-text');
+
+    $btnLogo.classList.add("is-actived");
+    $btnLogo.classList.remove("blue-text");
+
+  }
+
 });

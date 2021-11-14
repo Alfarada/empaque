@@ -36,7 +36,7 @@ export const showSuccessMessage = () => {
 };
 
 // response validation
-// Operación readyStateChange completda pero
+// Operación readyStateChange completada pero
 // recibimos una respuesta válida con error
 export const validateResponse = (res) => {
   if (res.error) {

@@ -109,7 +109,7 @@ document.addEventListener("submit", (e) => {
           method: "POST",
           success: (res) => {
             validateResponse(res);
-            getAll();
+            getLogoBoxes();
             resetForm();
             showSuccessMessage();
           },

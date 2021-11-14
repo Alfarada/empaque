@@ -58,9 +58,16 @@ if (validateData($registry, $ingress, $egrees, $stock, $logo)) {
     if ($conn->connect_errno) {
         $response = ['error' => true];
     } else {
-        $stmt = $conn->prepare("INSERT INTO with_logo_table (registry,ingress,egrees,stock,logo) VALUES (?,?,?,?,?)");
-        $stmt->bind_param('siiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo);
-        $stmt->execute();
+
+        if ($logo == 1) {
+            $stmt = $conn->prepare("INSERT INTO with_logo_table (registry,ingress,egrees,stock,logo) VALUES (?,?,?,?,?)");
+            $stmt->bind_param('siiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo);
+            $stmt->execute();
+        } else {
+            $stmt = $conn->prepare("INSERT INTO with_out_logo_table (registry,ingress,egrees,stock,logo) VALUES (?,?,?,?,?)");
+            $stmt->bind_param('siiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo);
+            $stmt->execute();
+        }
 
         if ($conn->affected_rows <= 0) {
             $response = [

@@ -8,9 +8,9 @@ let $crudTable = document.querySelector(".crud_table"),
   $p = $cardDescription.querySelector("p"),
   $cardNotice = document.querySelector(".notice");
 
-export const getAll = () => {
+export const getLogoBoxes = () => {
   ajax({
-    url: "../api/registro.php",
+    url: "../api/BoxesWithLogo.php",
     success: (res) => {
       responseHandler(res);
     },
@@ -19,6 +19,18 @@ export const getAll = () => {
     },
   });
 };
+
+export const getBoxesWithOutLogo = () => {
+  ajax({
+    url: "../api/BoxesWithOutLogo.php",
+    success: (res) => {
+      responseHandler(res);
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
 
 const responseHandler = (res) => {
   // if the response is an empty array

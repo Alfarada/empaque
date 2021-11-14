@@ -1,5 +1,5 @@
 import { ajax } from "./xhr.js";
-import { getAll } from "./read.js";
+import { getLogoBoxes, getBoxesWithOutLogo } from "./read.js";
 import { renderPaginate } from "./pagination.js";
 import { renderTable } from "./table.js";
 import {
@@ -10,7 +10,7 @@ import {
 import { resetForm, removeButtonToCancelEdit } from "./helpers.js";
 
 // ====================  get all records =======================
-document.addEventListener("DOMContentLoaded", getAll);
+document.addEventListener("DOMContentLoaded", getLogoBoxes);
 
 // ===================== pagination =============================
 
@@ -316,10 +316,25 @@ const calHandler = (e) => {
 document.addEventListener("click", (e) => {
 
   let $btnWithOutLogo = document.querySelector('.section_table').lastElementChild,
-    $btnLogo = document.querySelector('.section_table').firstElementChild;
+    $btnLogo = document.querySelector('.section_table').firstElementChild,
+    $table = document.querySelector(".crud_table"),
+    $tbody = $table.querySelector("tbody");
 
   const BTN_LOGO = '.btn-logo',
     BTN_WITHOUT_LOGO = '.btn-without-logo';
+
+  // if the user clicks on the button " with logo "
+  if (e.target.matches(BTN_LOGO) || e.target.matches(`${BTN_LOGO} *`)) {
+
+    $btnWithOutLogo.classList.remove('is-actived');
+    $btnWithOutLogo.classList.add('blue-text');
+
+    $btnLogo.classList.add("is-actived");
+    $btnLogo.classList.remove("blue-text");
+
+    getLogoBoxes();
+
+  }
 
   // if the user clicks on the button " without logo "
   if (e.target.matches(BTN_WITHOUT_LOGO) || e.target.matches(`${BTN_WITHOUT_LOGO} *`)) {
@@ -330,16 +345,7 @@ document.addEventListener("click", (e) => {
     $btnLogo.classList.remove("is-actived");
     $btnLogo.classList.add("blue-text");
 
-  }
-
-  // if the user clicks on the button " with logo "
-  if (e.target.matches(BTN_LOGO) || e.target.matches(`${BTN_LOGO} *`)) {
-
-    $btnWithOutLogo.classList.remove('is-actived');
-    $btnWithOutLogo.classList.add('blue-text');
-
-    $btnLogo.classList.add("is-actived");
-    $btnLogo.classList.remove("blue-text");
+    getBoxesWithOutLogo();
 
   }
 

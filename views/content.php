@@ -14,7 +14,7 @@
 <body>
     <div class="row">
         <div class="container">
-            <h3 class="title center-align">PESKOREA S.A.</h3>
+            <h3 class="title center-align">Empaque</h3>
             <h4 class="grey-text center-align">Gestión de cajas</h4>
 
             <!-- card notice -->

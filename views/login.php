@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <title>Register</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -16,7 +17,8 @@
         <div class="container-login valign-wrapper center-align">
             <!-- <div class="col s12 m8 offset-m2 l6 offset-l3 xl5 offset-xl3"> -->
             <div class="col s12 m8 offset-m2 l4 offset-l4">
-                <h3 class="title">PESKOREA S.A</h3>
+                <i class='bx bxl-dropbox bx-lg' ></i>
+                <h3 class="title">Empaque</h3>
                 <h4 class="grey-text">Inicio de Sesión</h4>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="form" name="login">
                     <div class="input-field">
@@ -40,11 +42,11 @@
 
                     <!-- if there is an error then it shows message -->
                     <?php if (!empty($errors)) : ?>
-                    <div class="errors">
-                        <ul>
-                            <?php echo $errors; ?>
-                        </ul>
-                    </div>
+                        <div class="errors">
+                            <ul>
+                                <?php echo $errors; ?>
+                            </ul>
+                        </div>
                     <?php endif; ?>
 
                 </form>

@@ -17,6 +17,10 @@ html {
   margin-bottom: 3rem;
 }
 
+.bxl-dropbox:before {
+  font-size: 8rem;
+}
+
 /* ============= Buttons ==============*/
 
 .btn-reset {

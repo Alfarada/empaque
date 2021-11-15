@@ -18,13 +18,13 @@ document.addEventListener("click", (e) => {
   // paginate content 1,2,3 ...
   if (e.target.textContent && e.target.localName == "a") {
     ajax({
-      url: `../api/registro.php?pagina=${e.target.textContent}`,
+      url: `../api/BoxesWithLogo.php?pagina=${e.target.textContent}`,
       success: (res) => {
         renderTable(res);
         renderPaginate(res);
       },
       error: () => {
-        console.log("error en la petición paginacion");
+        console.log("error al renderizar la paginacion");
       },
     });
   }
@@ -35,13 +35,13 @@ document.addEventListener("click", (e) => {
   if (e.target.classList.contains("next") && e.target.localName == "i") {
     if (e.target.name <= $pagination.childElementCount - 3) {
       ajax({
-        url: `../api/registro.php?pagina=${e.target.name + 1}`,
+        url: `../api/BoxesWithLogo.php?pagina=${e.target.name + 1}`,
         success: (res) => {
           renderTable(res);
           renderPaginate(res);
         },
         error: () => {
-          console.log("error en la petición paginacion");
+          console.log("error al renderizar la paginacion");
         },
       });
     } else {
@@ -52,13 +52,13 @@ document.addEventListener("click", (e) => {
   if (e.target.classList.contains("back") && e.target.localName == "i") {
     if (e.target.name >= 2) {
       ajax({
-        url: `../api/registro.php?pagina=${e.target.name - 1}`,
+        url: `../api/BoxesWithLogo.php?pagina=${e.target.name - 1}`,
         success: (res) => {
           renderTable(res);
           renderPaginate(res);
         },
         error: () => {
-          console.log("error en la petición paginacion");
+          console.log("error al renderizar la paginacion");
         },
       });
     } else {
@@ -249,20 +249,39 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 document.addEventListener("click", (e) => {
+
+  let $btnLogo = document.querySelector('.btn-logo');
+
   if (e.target.matches(".accept-modal")) {
-    ajax({
-      url: "../api/delete_records.php",
-      method: "POST",
-      success: (res) => {
-        console.log(res);
-        validateResponse(res);
-        getAll();
-      },
-      error: (res) => {
-        console.error("Error en eliminar el registro", res);
-      },
-      data: `id=${e.target.dataset.id}`,
-    });
+    
+    if ($btnLogo.classList.contains('is-actived')) {
+      ajax({
+        url: "../api/Delete.php",
+        method: "POST",
+        success: (res) => {
+          validateResponse(res);
+          getLogoBoxes();
+        },
+        error: (res) => {
+          console.error("Error en eliminar el registro", res);
+        },
+        data: `id=${e.target.dataset.id}&logo=${1}`,
+      });
+    } else {
+
+      ajax({
+        url: "../api/Delete.php",
+        method: "POST",
+        success: (res) => {
+          validateResponse(res);
+          getBoxesWithOutLogo();
+        },
+        error: (res) => {
+          console.error("Error en eliminar el registro", res);
+        },
+        data: `id=${e.target.dataset.id}&logo=${0}`,
+      });
+    }
   }
 
   if (e.target.matches(".modal-close.red.btn")) {

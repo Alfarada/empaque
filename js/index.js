@@ -136,11 +136,11 @@ document.addEventListener("submit", (e) => {
       // UPDATE REGISTER - EDITAR REGISTRO
       if (isItValid) {
         ajax({
-          url: "../api/update_records.php",
+          url: "../api/Update.php",
           method: "POST",
           success: (res) => {
             validateResponse(res);
-            getAll();
+            getLogoBoxes();
             resetForm();
             removeButtonToCancelEdit();
           },

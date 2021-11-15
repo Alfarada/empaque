@@ -54,26 +54,51 @@ if (validateData($id, $registry, $ingress, $egrees, $stock, $logo)) {
         $response = ['error' => true];
     } else {
 
-        $query =
-            "UPDATE with_logo_table SET 
+        if ($logo == 1) {
+            $query =
+                "UPDATE with_logo_table SET 
             `registry` = ?,
             `ingress`  = ?,
             `egrees`   = ?,
             `stock`    = ?,
             `logo`     = ?
             WHERE `id` = ?";
-        
-        $stmt = $conn->prepare($query);
 
-        if ($stmt === false) {
-            $response = [ "SQL Error: " . mysqli_error($conn)];
+            $stmt = $conn->prepare($query);
+
+            if ($stmt === false) {
+                $response = ["SQL Error: " . mysqli_error($conn)];
+            } else {
+
+                $stmt->bind_param('siiiii', $registry, $ingress, $egrees, $stock, $logo, $id);
+                $res = $stmt->execute();
+
+                if ($res === false) {
+                    $response = ["SQL Error: " . $stmt->error];
+                }
+            }
         } else {
+            $query =
+                "UPDATE with_out_logo_table SET 
+            `registry` = ?,
+            `ingress`  = ?,
+            `egrees`   = ?,
+            `stock`    = ?,
+            `logo`     = ?
+            WHERE `id` = ?";
 
-            $stmt->bind_param('siiiii', $registry, $ingress, $egrees, $stock, $logo, $id);
-            $res = $stmt->execute();
+            $stmt = $conn->prepare($query);
 
-            if ($res === false) {
-                $response = ["SQL Error: " . $stmt->error];
+            if ($stmt === false) {
+                $response = ["SQL Error: " . mysqli_error($conn)];
+            } else {
+
+                $stmt->bind_param('siiiii', $registry, $ingress, $egrees, $stock, $logo, $id);
+                $res = $stmt->execute();
+
+                if ($res === false) {
+                    $response = ["SQL Error: " . $stmt->error];
+                }
             }
         }
 

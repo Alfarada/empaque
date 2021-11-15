@@ -105,7 +105,7 @@ document.addEventListener("submit", (e) => {
     if (!e.target.id.value) {
       if (isItValid) {
         ajax({
-          url: "../api/insert_data.php",
+          url: "../api/Create.php",
           method: "POST",
           success: (res) => {
             validateResponse(res);

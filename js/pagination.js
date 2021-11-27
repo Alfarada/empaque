@@ -1,4 +1,6 @@
 import { clearChildElements } from "./helpers.js";
+import { getBoxesWithOutLogo, responseHandler } from "./read.js";
+import { ajax } from "./xhr.js";
 
 export const renderPaginate = (res) => {
   if (res.length) {
@@ -111,3 +113,105 @@ const right = (page, numberpages) => {
 
   // ========= disable/enabled next button =========
 };
+
+export const paginateWithLogo = (e) => {
+  if (e.target.textContent && e.target.localName == "a") {
+    ajax({
+      url: `../api/BoxesWithLogo.php?pagina=${e.target.textContent}`,
+      success: (res) => {
+        responseHandler(res);
+      },
+      error: () => {
+        console.log("error al renderizar la paginacion");
+      },
+    });
+  }
+
+  // arrow right
+  let $pagination = document.querySelector(".pagination");
+
+  if (e.target.classList.contains("next") && e.target.localName == "i") {
+    if (e.target.name <= $pagination.childElementCount - 3) {
+      ajax({
+        url: `../api/BoxesWithLogo.php?pagina=${e.target.name + 1}`,
+        success: (res) => {
+          responseHandler(res);
+        },
+        error: () => {
+          console.log("error al renderizar la paginacion");
+        },
+      });
+    } else {
+      return false;
+    }
+  }
+  // arrow left
+  if (e.target.classList.contains("back") && e.target.localName == "i") {
+    if (e.target.name >= 2) {
+      ajax({
+        url: `../api/BoxesWithLogo.php?pagina=${e.target.name - 1}`,
+        success: (res) => {
+          responseHandler(res);
+        },
+        error: () => {
+          console.log("error al renderizar la paginacion");
+        },
+      });
+    } else {
+      return false;
+    }
+  }
+};
+
+export const paginateWithOutLogo = (e) => {
+  console.log('paginate withOutLogo');
+  console.log(e.target);
+
+  if (e.target.textContent && e.target.localName == "a") {
+    ajax({
+      url: `../api/BoxesWithOutLogo.php?pagina=${e.target.textContent}`,
+      success: (res) => {
+        console.log(res);
+        responseHandler(res);
+      },
+      error: () => {
+        console.log("error al renderizar la paginacion");
+      },
+    });
+  }
+
+  // arrow right
+  let $pagination = document.querySelector(".pagination");
+
+  if (e.target.classList.contains("next") && e.target.localName == "i") {
+    if (e.target.name <= $pagination.childElementCount - 3) {
+      ajax({
+        url: `../api/BoxesWithOutLogo.php?pagina=${e.target.name + 1}`,
+        success: (res) => {
+          responseHandler(res);
+        },
+        error: () => {
+          console.log("error al renderizar la paginacion");
+        },
+      });
+    } else {
+      return false;
+    }
+  }
+  // arrow left
+  if (e.target.classList.contains("back") && e.target.localName == "i") {
+    if (e.target.name >= 2) {
+      ajax({
+        url: `../api/BoxesWithOutLogo.php?pagina=${e.target.name - 1}`,
+        success: (res) => {
+          responseHandler(res);
+        },
+        error: () => {
+          console.log("error al renderizar la paginacion");
+        },
+      });
+    } else {
+      return false;
+    }
+  }
+}

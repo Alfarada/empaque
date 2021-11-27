@@ -32,7 +32,7 @@ export const getBoxesWithOutLogo = () => {
   });
 }
 
-const responseHandler = (res) => {
+export const responseHandler = (res) => {
   // if the response is an empty array
   if (res.length === 0) {
     return showNotice();

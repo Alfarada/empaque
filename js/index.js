@@ -1,6 +1,6 @@
 import { ajax } from "./xhr.js";
-import { getLogoBoxes, getBoxesWithOutLogo } from "./read.js";
-import { renderPaginate } from "./pagination.js";
+import { getLogoBoxes, getBoxesWithOutLogo, responseHandler } from "./read.js";
+import { paginateWithLogo, paginateWithOutLogo, renderPaginate } from "./pagination.js";
 import { renderTable } from "./table.js";
 import {
   validateInputs,
@@ -15,56 +15,72 @@ document.addEventListener("DOMContentLoaded", getLogoBoxes);
 // ===================== pagination =============================
 
 document.addEventListener("click", (e) => {
+
+  let $btnLogo = document.querySelector(".btn-logo"),
+    $btnWithOutLogo = document.querySelector(".btn-without-logo");
+
+  if ($btnLogo.classList.contains("is-actived")) {
+    paginateWithLogo(e)
+  }
+
+  if ($btnWithOutLogo.classList.contains("is-actived")) {
+    paginateWithOutLogo(e)
+  }
+
+  //  button.classList.values(".btn-with-logo") ? paginateWithLogo() : paginateWithOutLogo();
   // paginate content 1,2,3 ...
-  if (e.target.textContent && e.target.localName == "a") {
-    ajax({
-      url: `../api/BoxesWithLogo.php?pagina=${e.target.textContent}`,
-      success: (res) => {
-        renderTable(res);
-        renderPaginate(res);
-      },
-      error: () => {
-        console.log("error al renderizar la paginacion");
-      },
-    });
-  }
+  // if (e.target.textContent && e.target.localName == "a") {
+  //   ajax({
+  //     url: `../api/BoxesWithLogo.php?pagina=${e.target.textContent}`,
+  //     success: (res) => {
+  //       responseHandler(res);
+  //       // renderTable(res);
+  //       // renderPaginate(res);
+  //     },
+  //     error: () => {
+  //       console.log("error al renderizar la paginacion");
+  //     },
+  //   });
+  // }
 
-  // arrow right
-  let $pagination = document.querySelector(".pagination");
+  // // arrow right
+  // let $pagination = document.querySelector(".pagination");
 
-  if (e.target.classList.contains("next") && e.target.localName == "i") {
-    if (e.target.name <= $pagination.childElementCount - 3) {
-      ajax({
-        url: `../api/BoxesWithLogo.php?pagina=${e.target.name + 1}`,
-        success: (res) => {
-          renderTable(res);
-          renderPaginate(res);
-        },
-        error: () => {
-          console.log("error al renderizar la paginacion");
-        },
-      });
-    } else {
-      return false;
-    }
-  }
-  // arrow left
-  if (e.target.classList.contains("back") && e.target.localName == "i") {
-    if (e.target.name >= 2) {
-      ajax({
-        url: `../api/BoxesWithLogo.php?pagina=${e.target.name - 1}`,
-        success: (res) => {
-          renderTable(res);
-          renderPaginate(res);
-        },
-        error: () => {
-          console.log("error al renderizar la paginacion");
-        },
-      });
-    } else {
-      return false;
-    }
-  }
+  // if (e.target.classList.contains("next") && e.target.localName == "i") {
+  //   if (e.target.name <= $pagination.childElementCount - 3) {
+  //     ajax({
+  //       url: `../api/BoxesWithLogo.php?pagina=${e.target.name + 1}`,
+  //       success: (res) => {
+  //         responseHandler(res);
+  //         // renderTable(res);
+  //         // renderPaginate(res);
+  //       },
+  //       error: () => {
+  //         console.log("error al renderizar la paginacion");
+  //       },
+  //     });
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  // // arrow left
+  // if (e.target.classList.contains("back") && e.target.localName == "i") {
+  //   if (e.target.name >= 2) {
+  //     ajax({
+  //       url: `../api/BoxesWithLogo.php?pagina=${e.target.name - 1}`,
+  //       success: (res) => {
+  //         responseHandler(res);
+  //         // renderTable(res);
+  //         // renderPaginate(res);
+  //       },
+  //       error: () => {
+  //         console.log("error al renderizar la paginacion");
+  //       },
+  //     });
+  //   } else {
+  //     return false;
+  //   }
+  // }
 });
 // ==============================================================
 

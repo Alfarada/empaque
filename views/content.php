@@ -98,6 +98,7 @@
                     <div class="card container-table show col s12 l8 offset-l1">
                         <span class="table_title">
                             <h4>Tabla de registros</h4>
+                            <!-- Buttons Logo -->
                             <section class="row section_table">
                                 <article class="btn-logo col s6 is-actived">
                                     <p class="flow-text">Con logo</p>
@@ -106,6 +107,7 @@
                                     <p class="flow-text">Sin logo</p>
                                 </article>
                             </section>
+                            <!-- Buttons Logo -->
                         </span>
 
                         <!-- empty database short description -->

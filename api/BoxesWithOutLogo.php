@@ -14,7 +14,7 @@ if ($conn->connect_errno) {
 
     $page = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
-    $postPerPage = 10;
+    $postPerPage = 3;
 
     $start = ($page > 1) ? ($page * $postPerPage - $postPerPage) : 0;
 

@@ -14,13 +14,13 @@ export const resetForm = () => {
   $h5.textContent = "Formulario";
   $form.submit.textContent = "Enviar";
 
-  $form.registry.value = "";
+  $form.registry.value = 0;
   $form.registry.classList.remove("valid");
-  $form.ingress.value = "";
+  $form.ingress.value = 0;
   $form.ingress.classList.remove("valid");
-  $form.egrees.value = "";
+  $form.egrees.value = 0;
   $form.egrees.classList.remove("valid");
-  $form.stock.value = "";
+  $form.stock.value = 0;
   $form.stock.classList.remove("valid");
   $form.logo.value = 0;
   $form.logo.checked = false;

@@ -4,8 +4,8 @@ import { renderPaginate } from "./pagination.js";
 
 let $crudTable = document.querySelector(".crud_table"),
   $table = document.querySelector(".container-table"),
-  $cardDescription = document.querySelector(".empty-database"),
-  $p = $cardDescription.querySelector("p"),
+  $shortDescription = $table.querySelector(".short-description"),
+  // $cardDescription = document.querySelector(".empty-database"),
   $cardNotice = document.querySelector(".notice");
 
 export const getLogoBoxes = () => {
@@ -23,7 +23,7 @@ export const getLogoBoxes = () => {
 export const getBoxesWithOutLogo = () => {
   ajax({
     url: "../api/BoxesWithOutLogo.php",
-    success: (res) => {
+    success: (res) => { 
       responseHandler(res);
     },
     error: (err) => {
@@ -48,13 +48,11 @@ const responseHandler = (res) => {
 
 // show the table and hide the warnings
 const showElements = () => {
-  
-  $table.classList.remove("hide");                 // show table
-  $cardNotice.classList.add("hide");               // hide notice
 
-  // hide card with short description
-  // when database is empty
-  $cardDescription.classList.add("hide");
+  $cardNotice.classList.add("hide");          // hide notice
+  $shortDescription.classList.add("hide");    // hide short description
+  $crudTable.classList.remove("hide");        // show crud table
+
 };
 
 const renderElements = (res) => {
@@ -63,32 +61,36 @@ const renderElements = (res) => {
   renderPaginate(res);
 };
 
-
+//  Show card notice and hide/show crud table
 const showNotice = () => {
   let $cardContent = $cardNotice.querySelector(".card-content"),
     $h6 = $cardContent.querySelector("h6");
 
   $h6.textContent = "No hay registros en la base de datos.";
 
+  $shortDescription.classList.remove("hide");       // hide short description
+
   // if the card notice is orange, it changes to red
   if ($cardNotice.matches(".orange")) {
 
     $cardNotice.classList.replace("orange","red");  // change color
     $cardNotice.classList.remove("hide");           // show card
-    $table.classList.add("hide");                   // hide table
+    $crudTable.classList.add("hide");               // hide table
+    // $table.classList.add("hide");                   // hide table
 
     // and with short description
     // when database is empty
-    $cardDescription.classList.remove("hide");
+    // $cardDescription.classList.remove("hide");
 
   } else {
     $cardNotice.classList.add("red");               // add color
     $cardNotice.classList.remove("hide");           // show card
-    $table.classList.add("hide");                   // hide table
+    $crudTable.classList.add("hide");               // hide table
+    // $table.classList.add("hide");                   // hide table
 
     // with short description
     // when database is empty
-    $cardDescription.classList.remove("hide");
+    // $cardDescription.classList.remove("hide");
   }
 };
 

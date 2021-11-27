@@ -72,16 +72,16 @@
                         </div>
                         <div class="input-field">
                             <label for="stock">Stock</label>
-                            <input type="number" id="stock" class="validate stock" name="stock" readonly="readonly" placeholder="stock" maxlength="5">
+                            <input type="number" id="stock" class="validate stock" name="stock" readonly="readonly" value="0" maxlength="5">
                         </div>
 
                         <div class="switch">
-                            <p class="logo-text">¿ Cajas con logo ?</p>
+                            <!-- <p class="logo-text">¿ Cajas con logo ?</p> -->
                             <label>
-                                No
+                                Sin logo
                                 <input class="logo validate" type="checkbox" name="logo">
                                 <span class="lever"></span>
-                                Si
+                                Con logo
                             </label>
 
                         </div>
@@ -95,45 +95,48 @@
                 </article>
                 <!-- <article class="show col s12 l9"> -->
                 <article>
+                    <div class="card container-table show col s12 l8 offset-l1">
+                        <span class="table_title">
+                            <h4>Tabla de registros</h4>
+                            <section class="row section_table">
+                                <article class="btn-logo col s6 is-actived">
+                                    <p class="flow-text">Con logo</p>
+                                </article>
+                                <article class="btn-without-logo blue-text col s6">
+                                    <p class="flow-text">Sin logo</p>
+                                </article>
+                            </section>
+                        </span>
 
-                    <!-- empty database short description -->
-                    <div id="loader" class="card col s12 l8 offset-l1 hide">
-                        <!-- Loader -->
-                        <div class="preloader-wrapper big active" style="margin: 2rem;">
-                            <div class="spinner-layer spinner-blue-only">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <h6 style="padding-bottom: 2rem;">Cargando ...</h6>
-                        <!-- Loader -->
-                    </div>
-                    <div class="card empty-database col s12 l8 offset-l1 hide">
-                        <div>
+                        <!-- empty database short description -->
+                        <div class="short-description hide">
                             <i class="large material-icons">
                                 <span class="material-icons-outlined" style="color:#e0e0e0;">
                                     visibility_off
                                 </span>
                             </i>
+                            <p>No hay registros en la base de datos.</p>
                         </div>
-                        <p class='short-description'>No hay registros en la base de datos.</p>
-                    </div>
-                    <!-- empty database short description -->
-                    <div class="card container-table show col s12 l8 offset-l1">
-                        <span class="table_title">
-                            <h4>Tabla de registros</h4>
-                            <section class="row section_table">
-                                <article class="btn-logo col s6 is-actived"><p class="flow-text">Con logo</p></article>
-                                <article class="btn-without-logo blue-text col s6"><p class="flow-text">Sin logo</p></article>
-                            </section>
-                        </span>
+                        <!-- empty database short description -->
+
+                        <!-- Loader -->
+                        <div id="loader" class=" col s12 l8 offset-l1 hide">
+                            <div class="preloader-wrapper big active" style="margin: 2rem;">
+                                <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 style="padding-bottom: 2rem;">Cargando ...</h6>
+                        </div>
+                        <!-- Loader -->
                         <table class="crud_table centered responsive-table">
                             <thead>
                                 <tr>

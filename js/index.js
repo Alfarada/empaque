@@ -191,6 +191,7 @@ document.addEventListener("click", (e) => {
     $form.ingress.value = e.target.dataset.ingress;
     $form.egrees.value = e.target.dataset.egrees;
     $form.stock.value = e.target.dataset.stock;
+    // $form.stock.value = 0;
 
     if (e.target.dataset.logo == 0) {
       $form.logo.value = 0;
@@ -249,18 +250,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 document.addEventListener("click", (e) => {
-
-  let $btnLogo = document.querySelector('.btn-logo');
+  let $btnLogo = document.querySelector(".btn-logo"),
+    $crudForm = document.querySelector(".crud_form"),
+    $form = document.querySelector(".crud_form"),
+    $stock = $form.stock;
 
   if (e.target.matches(".accept-modal")) {
-    
-    if ($btnLogo.classList.contains('is-actived')) {
+    if ($btnLogo.classList.contains("is-actived")) {
       ajax({
         url: "../api/Delete.php",
         method: "POST",
         success: (res) => {
           validateResponse(res);
-          getLogoBoxes();
+          // getLogoBoxes();
+  
+          location.reload();
+
         },
         error: (res) => {
           console.error("Error en eliminar el registro", res);
@@ -268,13 +273,15 @@ document.addEventListener("click", (e) => {
         data: `id=${e.target.dataset.id}&logo=${1}`,
       });
     } else {
-
       ajax({
         url: "../api/Delete.php",
         method: "POST",
         success: (res) => {
           validateResponse(res);
           getBoxesWithOutLogo();
+
+          // $stock.value = 0;
+
         },
         error: (res) => {
           console.error("Error en eliminar el registro", res);
@@ -293,71 +300,91 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("change", (e) => calHandler(e));
 document.addEventListener("keyup", (e) => calHandler(e));
+// document.addEventListener("click", (e) => calHandler(e));
 
 // calculator handler
 const calHandler = (e) => {
   let $form = document.querySelector(".crud_form"),
-    $table = document.querySelector(".crud_table"),
-    $tbody = $table.querySelector("tbody"),
-    $ingress = $form.ingress,
-    $egrees = $form.egrees,
-    $stock = $form.stock;
+    $table  = document.querySelector(".crud_table"),
+    $tbody  = $table.querySelector("tbody"),
+    $tr     = $tbody.querySelector("tr"),
+    $stock  = $tr.children[3].textContent,
+    stock   = parseInt($stock),  // o = stock
+    ingress = $form.ingress, // i = ingress
+    egrees  = $form.egrees,    // eg = 
+    formStock  = $form.stock, // s = formStock
+    hidden     = $form.id;
 
-  // if changes match selectors
+    // conseguir el stock que le sigue al mas reciente !!
+
+    let $oldTr = $tbody.children[1],
+     oldStock = $oldTr.children[3].textContent;
+
+  // if changes match this selectors
   if (e.target.matches(".ingress") || e.target.matches(".egrees")) {
-    // calculating new stock value with old value
+    
+    // IMPORTANT to pass the integer values
+    // let ingress = parseInt(ingress.value),
+    // egrees = parseInt(egrees.value);
+
+    // this method calculating new stock value with old value
+
+    // I - asks if a record is being edited
+    // II - if you add another record then it is added with the old stock.
+    // III - recalculate new stock.
     const calAll = () => {
-      let $tr = $tbody.querySelector("tr"),
-        $oldStock = $tr.children[3].textContent,
-        a = parseInt($ingress.value), // a = ingres.value
-        b = parseInt($egrees.value),  // b = egrees.value
-        c = parseInt($oldStock);      // c = oldStcok.value
 
-      $stock.value = a - b + c;       // stock.value = result
-    };
+      ( hidden.value === "" )               // I
+        ? formStock.value = parseInt(ingress.value) - parseInt(egrees.value) + stock  // II
+        : calEdit();     // III
+        // : s.value = ingress - egress;     // III
+    }
 
-    // calculating stock value
-    const calPartial = () => {
-      let a = parseInt($ingress.value),
-        b = parseInt($egrees.value);
+    const calEdit = () => {
+      let newValues = parseInt(ingress.value) - parseInt(egrees.value),
+        newStock = newValues + parseInt(oldStock);
 
-      $stock.value = a - b;
-    };
-
+        formStock.value = newStock;
+    }
+ 
+    const calPartial = () => formStock.value = parseInt(ingress) - parseInt(egrees); 
+    
     // checking the existence of values ​​in the body table
     $tbody.firstElementChild ? calAll() : calPartial();
+
   }
-};
+
+}
 
 // ============  real-time calculator in the form =============
 
 // TODO !
 document.addEventListener("click", (e) => {
-
-  let $btnWithOutLogo = document.querySelector('.section_table').lastElementChild,
-    $btnLogo = document.querySelector('.section_table').firstElementChild,
+  let $btnWithOutLogo =
+      document.querySelector(".section_table").lastElementChild,
+    $btnLogo = document.querySelector(".section_table").firstElementChild,
     $table = document.querySelector(".crud_table"),
     $tbody = $table.querySelector("tbody");
 
-  const BTN_LOGO = '.btn-logo',
-    BTN_WITHOUT_LOGO = '.btn-without-logo';
+  const BTN_LOGO = ".btn-logo",
+    BTN_WITHOUT_LOGO = ".btn-without-logo";
 
   // if the user clicks on the button " with logo "
   if (e.target.matches(BTN_LOGO) || e.target.matches(`${BTN_LOGO} *`)) {
-
-    $btnWithOutLogo.classList.remove('is-actived');
-    $btnWithOutLogo.classList.add('blue-text');
+    $btnWithOutLogo.classList.remove("is-actived");
+    $btnWithOutLogo.classList.add("blue-text");
 
     $btnLogo.classList.add("is-actived");
     $btnLogo.classList.remove("blue-text");
 
     getLogoBoxes();
-
   }
 
   // if the user clicks on the button " without logo "
-  if (e.target.matches(BTN_WITHOUT_LOGO) || e.target.matches(`${BTN_WITHOUT_LOGO} *`)) {
-
+  if (
+    e.target.matches(BTN_WITHOUT_LOGO) ||
+    e.target.matches(`${BTN_WITHOUT_LOGO} *`)
+  ) {
     $btnWithOutLogo.classList.add("is-actived");
     $btnWithOutLogo.classList.remove("blue-text");
 
@@ -365,7 +392,5 @@ document.addEventListener("click", (e) => {
     $btnLogo.classList.add("blue-text");
 
     getBoxesWithOutLogo();
-
   }
-
 });

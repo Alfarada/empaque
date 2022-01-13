@@ -164,8 +164,8 @@ export const paginateWithLogo = (e) => {
 };
 
 export const paginateWithOutLogo = (e) => {
-  console.log('paginate withOutLogo');
-  console.log(e.target);
+  // console.log('paginate withOutLogo');
+  // console.log(e.target);
 
   if (e.target.textContent && e.target.localName == "a") {
     ajax({

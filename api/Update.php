@@ -46,6 +46,16 @@ function validateData($id, $registry, $ingress, $egrees, $stock, $logo)
     return true;
 }
 
+// add time
+function addCurrentTime($registry)
+{
+    date_default_timezone_set('America/Guayaquil');
+    $currentDate = date("Y-m-d H:i:s");
+    $whitOutDate = explode(" ", $currentDate);
+    $registry = $registry . ' ' . $whitOutDate[1];
+    return $registry;
+}
+
 if (validateData($id, $registry, $ingress, $egrees, $stock, $logo)) {
     $conn = new mysqli('localhost', 'root', '', 'empaque');
     $conn->set_charset('utf8');
@@ -70,7 +80,7 @@ if (validateData($id, $registry, $ingress, $egrees, $stock, $logo)) {
                 $response = ["SQL Error: " . mysqli_error($conn)];
             } else {
 
-                $stmt->bind_param('siiiii', $registry, $ingress, $egrees, $stock, $logo, $id);
+                $stmt->bind_param('siiiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo, $id);
                 $res = $stmt->execute();
 
                 if ($res === false) {
@@ -93,7 +103,7 @@ if (validateData($id, $registry, $ingress, $egrees, $stock, $logo)) {
                 $response = ["SQL Error: " . mysqli_error($conn)];
             } else {
 
-                $stmt->bind_param('siiiii', $registry, $ingress, $egrees, $stock, $logo, $id);
+                $stmt->bind_param('siiiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo, $id);
                 $res = $stmt->execute();
 
                 if ($res === false) {

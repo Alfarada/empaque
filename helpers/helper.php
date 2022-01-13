@@ -2,9 +2,9 @@
 
 function url($string = null) // controllers/register.php
 {   
-    $url = "http://peskorea.test/" . $string;
+    $url = "http://empaque.test/" . $string;
 
-    return $url;
+    return $url; 
 }
 
 function location($route)

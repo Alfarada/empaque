@@ -8,10 +8,21 @@ let $crudTable = document.querySelector(".crud_table"),
   // $cardDescription = document.querySelector(".empty-database"),
   $cardNotice = document.querySelector(".notice");
 
-export const getLogoBoxes = () => {
+export const getBoxesWithLogo = () => {
   ajax({
     url: "../api/BoxesWithLogo.php",
     success: (res) => {
+
+      
+      if (localStorage.length === 0) {
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      } else if (localStorage.length !== 0) {
+        localStorage.removeItem("with_out_logo");
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      } else {
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      }
+      
       responseHandler(res);
     },
     error: (err) => {
@@ -23,7 +34,17 @@ export const getLogoBoxes = () => {
 export const getBoxesWithOutLogo = () => {
   ajax({
     url: "../api/BoxesWithOutLogo.php",
-    success: (res) => { 
+    success: (res) => {
+      
+      if (localStorage.length === 0) {
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      } else if (localStorage.length !== 0) {
+        localStorage.removeItem("with_out_logo");
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      } else {
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      }
+
       responseHandler(res);
     },
     error: (err) => {
@@ -86,7 +107,7 @@ const showNotice = () => {
     $cardNotice.classList.add("red");               // add color
     $cardNotice.classList.remove("hide");           // show card
     $crudTable.classList.add("hide");               // hide table
-    // $table.classList.add("hide");                   // hide table
+    // $table.classList.add("hide");                // hide table
 
     // with short description
     // when database is empty

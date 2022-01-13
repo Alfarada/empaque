@@ -29,8 +29,8 @@ function addCurrentTime($registry)
 {
     date_default_timezone_set('America/Guayaquil');
     $currentDate = date("Y-m-d H:i:s");
-    $whitHoutDate = explode(" ", $currentDate);
-    $registry = $registry . ' ' . $whitHoutDate[1];
+    $whitOutDate = explode(" ", $currentDate);
+    $registry = $registry . ' ' . $whitOutDate[1];
     return $registry;
 }
 

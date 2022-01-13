@@ -24,10 +24,21 @@ export const resetForm = () => {
   $form.stock.classList.remove("valid");
   $form.logo.value = 0;
   $form.logo.checked = false;
-  $form.id.value = '';
+  $form.id.value = "";
 };
 
 export const removeButtonToCancelEdit = () => {
   let $formEditButton = document.querySelector(".btn-reset");
   $formEditButton.classList.add("none");
+};
+
+export const removeChildrenTbodyTable = () => {
+  let $table = document.querySelector(".crud_table"),
+    $tbody = $table.querySelector("tbody");
+
+  if ($tbody.children) {
+    while ($tbody.firstChild) {
+      $tbody.removeChild($tbody.firstChild);
+    }
+  }
 };

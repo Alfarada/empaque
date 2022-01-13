@@ -64,7 +64,7 @@ const checkElements = ($tbody) => {
     let $tr = $tbody.querySelector("tr"),
     $stock = $tr.children[3].textContent;
 
-    $form.stock.value = $stock; // set into form field stock
+    // $form.stock.value = $stock; // set into form field stock
     
     if ($stock < 5000) showNotice($stock);
   }

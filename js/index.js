@@ -1,101 +1,101 @@
 import { ajax } from "./xhr.js";
-import { getLogoBoxes, getBoxesWithOutLogo, responseHandler } from "./read.js";
-import { paginateWithLogo, paginateWithOutLogo, renderPaginate } from "./pagination.js";
+import { calcHandler } from "./calForm.js";
+import { getBoxesWithLogo, getBoxesWithOutLogo } from "./read.js";
+import {
+  paginateWithLogo,
+  paginateWithOutLogo,
+  renderPaginate,
+} from "./pagination.js";
 import { renderTable } from "./table.js";
 import {
   validateInputs,
   showSuccessMessage,
   validateResponse,
 } from "./validation.js";
-import { resetForm, removeButtonToCancelEdit } from "./helpers.js";
+import {
+  resetForm,
+  removeButtonToCancelEdit,
+  removeChildrenTbodyTable,
+} from "./helpers.js";
 
-// ====================  get all records =======================
-document.addEventListener("DOMContentLoaded", getLogoBoxes);
+// ====================  get all records ======================
+
+document.addEventListener("DOMContentLoaded", getBoxesWithLogo());
+
+const refresh = () => {
+  ajax({
+    url: "../api/BoxesWithLogo.php",
+    success: (res) => {
+      if (localStorage.length === 0) {
+        localStorage.setItem("with_logo", JSON.stringify(res));
+      } else if (localStorage.length !== 0) {
+        localStorage.removeItem("with_logo");
+        localStorage.setItem("with_logo", JSON.stringify(res));
+      } else {
+        localStorage.setItem("with_logo", JSON.stringify(res));
+      }
+    },
+    error: (err) => console.log("can't set data in local memory"),
+  });
+
+  ajax({
+    url: "../api/BoxesWithOutLogo.php",
+    success: (res) => {
+      if (localStorage.length === 0) {
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      } else if (localStorage.length !== 0) {
+        localStorage.removeItem("with_out_logo");
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      } else {
+        localStorage.setItem("with_out_logo", JSON.stringify(res));
+      }
+    },
+    error: (err) => console.log("can't set data in local memory"),
+  });
+};
+
+document.addEventListener("DOMContentLoaded", refresh);
+
+// document.addEventListener("DOMContentLoaded", getBoxesWithOutLogo);
 
 // ===================== pagination =============================
 
 document.addEventListener("click", (e) => {
-
   let $btnLogo = document.querySelector(".btn-logo"),
     $btnWithOutLogo = document.querySelector(".btn-without-logo");
 
   if ($btnLogo.classList.contains("is-actived")) {
-    paginateWithLogo(e)
+    paginateWithLogo(e);
   }
 
   if ($btnWithOutLogo.classList.contains("is-actived")) {
-    paginateWithOutLogo(e)
+    paginateWithOutLogo(e);
   }
 
-  //  button.classList.values(".btn-with-logo") ? paginateWithLogo() : paginateWithOutLogo();
-  // paginate content 1,2,3 ...
-  // if (e.target.textContent && e.target.localName == "a") {
-  //   ajax({
-  //     url: `../api/BoxesWithLogo.php?pagina=${e.target.textContent}`,
-  //     success: (res) => {
-  //       responseHandler(res);
-  //       // renderTable(res);
-  //       // renderPaginate(res);
-  //     },
-  //     error: () => {
-  //       console.log("error al renderizar la paginacion");
-  //     },
-  //   });
-  // }
-
-  // // arrow right
-  // let $pagination = document.querySelector(".pagination");
-
-  // if (e.target.classList.contains("next") && e.target.localName == "i") {
-  //   if (e.target.name <= $pagination.childElementCount - 3) {
-  //     ajax({
-  //       url: `../api/BoxesWithLogo.php?pagina=${e.target.name + 1}`,
-  //       success: (res) => {
-  //         responseHandler(res);
-  //         // renderTable(res);
-  //         // renderPaginate(res);
-  //       },
-  //       error: () => {
-  //         console.log("error al renderizar la paginacion");
-  //       },
-  //     });
-  //   } else {
-  //     return false;
-  //   }
-  // }
-  // // arrow left
-  // if (e.target.classList.contains("back") && e.target.localName == "i") {
-  //   if (e.target.name >= 2) {
-  //     ajax({
-  //       url: `../api/BoxesWithLogo.php?pagina=${e.target.name - 1}`,
-  //       success: (res) => {
-  //         responseHandler(res);
-  //         // renderTable(res);
-  //         // renderPaginate(res);
-  //       },
-  //       error: () => {
-  //         console.log("error al renderizar la paginacion");
-  //       },
-  //     });
-  //   } else {
-  //     return false;
-  //   }
-  // }
 });
 // ==============================================================
 
 // establecer valor de cero al input a la carga del documento
 document.addEventListener("DOMContentLoaded", (e) => {
-  let $input = document.querySelector(".logo");
+  let $input = document.querySelector(".logo-switch");
   $input.setAttribute("value", 0);
 });
 
 // cambiar el estado al hacer click en el checkbox
 document.addEventListener("click", (e) => {
-  if (e.target.matches(".logo")) {
+
+  refresh();
+  
+  if (e.target.matches(".logo-switch")) {
+    // if (e.currentTarget.checked) {
     if (e.target.checked) {
+      // console.log(e.target.checked,'presionaste el botón checkbox');
+
       return (e.target.value = 1);
     }
+
+    // console.log(e.target.checked,'presionaste el botón checkbox');
+
     e.target.value = 0;
   }
 });
@@ -125,7 +125,8 @@ document.addEventListener("submit", (e) => {
           method: "POST",
           success: (res) => {
             validateResponse(res);
-            getLogoBoxes();
+            getBoxesWithOutLogo();
+            getBoxesWithLogo();
             resetForm();
             showSuccessMessage();
           },
@@ -156,7 +157,7 @@ document.addEventListener("submit", (e) => {
           method: "POST",
           success: (res) => {
             validateResponse(res);
-            getLogoBoxes();
+            getBoxesWithLogo();
             resetForm();
             removeButtonToCancelEdit();
           },
@@ -278,10 +279,9 @@ document.addEventListener("click", (e) => {
         method: "POST",
         success: (res) => {
           validateResponse(res);
-          // getLogoBoxes();
-  
-          location.reload();
+          getBoxesWithLogo();
 
+          // location.reload();
         },
         error: (res) => {
           console.error("Error en eliminar el registro", res);
@@ -293,11 +293,11 @@ document.addEventListener("click", (e) => {
         url: "../api/Delete.php",
         method: "POST",
         success: (res) => {
+          console.log(res);
           validateResponse(res);
           getBoxesWithOutLogo();
 
           // $stock.value = 0;
-
         },
         error: (res) => {
           console.error("Error en eliminar el registro", res);
@@ -314,63 +314,8 @@ document.addEventListener("click", (e) => {
 
 // ============  real-time calculator in the form =============
 
-document.addEventListener("change", (e) => calHandler(e));
-document.addEventListener("keyup", (e) => calHandler(e));
-// document.addEventListener("click", (e) => calHandler(e));
-
-// calculator handler
-const calHandler = (e) => {
-  let $form = document.querySelector(".crud_form"),
-    $table  = document.querySelector(".crud_table"),
-    $tbody  = $table.querySelector("tbody"),
-    $tr     = $tbody.querySelector("tr"),
-    $stock  = $tr.children[3].textContent,
-    stock   = parseInt($stock),  // o = stock
-    ingress = $form.ingress, // i = ingress
-    egrees  = $form.egrees,    // eg = 
-    formStock  = $form.stock, // s = formStock
-    hidden     = $form.id;
-
-    // conseguir el stock que le sigue al mas reciente !!
-
-    let $oldTr = $tbody.children[1],
-     oldStock = $oldTr.children[3].textContent;
-
-  // if changes match this selectors
-  if (e.target.matches(".ingress") || e.target.matches(".egrees")) {
-    
-    // IMPORTANT to pass the integer values
-    // let ingress = parseInt(ingress.value),
-    // egrees = parseInt(egrees.value);
-
-    // this method calculating new stock value with old value
-
-    // I - asks if a record is being edited
-    // II - if you add another record then it is added with the old stock.
-    // III - recalculate new stock.
-    const calAll = () => {
-
-      ( hidden.value === "" )               // I
-        ? formStock.value = parseInt(ingress.value) - parseInt(egrees.value) + stock  // II
-        : calEdit();     // III
-        // : s.value = ingress - egress;     // III
-    }
-
-    const calEdit = () => {
-      let newValues = parseInt(ingress.value) - parseInt(egrees.value),
-        newStock = newValues + parseInt(oldStock);
-
-        formStock.value = newStock;
-    }
- 
-    const calPartial = () => formStock.value = parseInt(ingress) - parseInt(egrees); 
-    
-    // checking the existence of values ​​in the body table
-    $tbody.firstElementChild ? calAll() : calPartial();
-
-  }
-
-}
+document.addEventListener("change", (e) => calcHandler(e));
+document.addEventListener("keyup", (e) => calcHandler(e));
 
 // ============  real-time calculator in the form =============
 
@@ -380,7 +325,12 @@ document.addEventListener("click", (e) => {
       document.querySelector(".section_table").lastElementChild,
     $btnLogo = document.querySelector(".section_table").firstElementChild,
     $table = document.querySelector(".crud_table"),
-    $tbody = $table.querySelector("tbody");
+    $tbody = $table.querySelector("tbody"),
+    $form = document.querySelector(".crud_form"),
+    ingress = $form.ingress,
+    egrees = $form.egrees,
+    formStock = $form.stock,
+    alert = document.querySelector(".short-description");
 
   const BTN_LOGO = ".btn-logo",
     BTN_WITHOUT_LOGO = ".btn-without-logo";
@@ -393,7 +343,16 @@ document.addEventListener("click", (e) => {
     $btnLogo.classList.add("is-actived");
     $btnLogo.classList.remove("blue-text");
 
-    getLogoBoxes();
+    // ---- clear children nodes in the tbody table ----
+    let $tbody = $table.querySelector("tbody");
+
+    if ($tbody.children) {
+      while ($tbody.firstChild) {
+        $tbody.removeChild($tbody.firstChild);
+      }
+    }
+
+    getBoxesWithLogo();
   }
 
   // if the user clicks on the button " without logo "
@@ -406,6 +365,9 @@ document.addEventListener("click", (e) => {
 
     $btnLogo.classList.remove("is-actived");
     $btnLogo.classList.add("blue-text");
+
+    // clear children nodes in the tbody table
+    removeChildrenTbodyTable();
 
     getBoxesWithOutLogo();
   }

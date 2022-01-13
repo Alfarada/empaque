@@ -12,17 +12,17 @@ export const ajax = (options) => {
   // Open Loader ...
   // this loader is related to a short
   // description in the table
-    $loader.classList.remove('hide');
-    $crudTable.classList.add('hide');
-    $shortDescription.classList.add("hide"); // short description
+    // $loader.classList.remove('hide');
+    // $crudTable.classList.add('hide');
+    // $shortDescription.classList.add("hide"); // short description
     
     xhr.addEventListener("readystatechange", (e) => {
       if (xhr.readyState !== 4) return;
       
       // close loader ...
-      $loader.classList.add('hide');
-      $crudTable.classList.remove('hide');
-      $shortDescription.classList.remove("hide");
+      // $loader.classList.add('hide');
+      // $crudTable.classList.remove('hide');
+      // $shortDescription.classList.remove("hide");
 
     if (xhr.status >= 200 && xhr.status < 300) {
       if (xhr.responseText) {

@@ -60,7 +60,7 @@
                         </span>
                         <div class="input-field">
                             <label for="fecha"></label>
-                            <input type="date" id="fecha" class="validate fecha" name="registry" id="registry">
+                            <input type="date" id="fecha" class="validate fecha" name="registry" id="registry" value="<?php echo date("Y-m-d");?>">
                         </div>
                         <div class="input-field">
                             <label for="ingress">Ingreso</label>
@@ -79,7 +79,7 @@
                             <!-- <p class="logo-text">¿ Cajas con logo ?</p> -->
                             <label>
                                 Sin logo
-                                <input class="logo validate" type="checkbox" name="logo">
+                                <input class="logo-switch validate" type="checkbox" name="logo">
                                 <span class="lever"></span>
                                 Con logo
                             </label>

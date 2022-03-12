@@ -2,7 +2,7 @@
 
 function url($string = null) // controllers/register.php
 {   
-    $url = "http://empaque.test/" . $string;
+    $url = "http://peskorea.test/" . $string;
 
     return $url; 
 }

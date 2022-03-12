@@ -3,6 +3,7 @@
 require_once '../user.php';
 require_once '../crud.php';
 require_once '../helpers/helper.php';
+require_once '../config.php';
 
 session_start();
 
@@ -12,16 +13,12 @@ if (isset($_SESSION['user'])) {
 
 $errors = '';
 
+$conn = getPDOConection();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = filter_var(strtolower($_POST['user']), FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
     $password = hash('sha512',$password);
-
-    try {
-        $conn = new PDO('mysql:host=localhost;dbname=empaque','root','');
-    } catch (PDOException $e) {
-        echo "Error: {$e->getMessage()}";
-    }
 
     $stmt = $conn->prepare('SELECT * FROM users WHERE user = :user AND pass = :pass');
     $stmt->execute(array(':user' => $user, ':pass' => $password));

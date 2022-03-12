@@ -4,6 +4,7 @@ require_once '../user.php';
 require_once '../crud.php';
 // require_once '../recordHandler.php';
 require_once '../helpers/helper.php';
+require_once '../config.php';
 
 session_start();
 
@@ -21,15 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password2 = $_POST['password_2'];
 
     $errors = '';
+    $conn = getPDOConection();
 
     if (empty($user) or empty($password) or empty($password2) ) {
         $errors .= '<li>Porfavor rellena los campos correctamente</li>';
     } else {
-        try {
-            $conn = new PDO('mysql:host=localhost;dbname=empaque','root','');
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
 
         $stmt = $conn->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
         $stmt->execute(array(':user' => $user));

@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $errors .='<li>Datos incorrectos</li>'; 
     }
+
+    $conn = null;
 }
 
 require_once '../views/login.php';

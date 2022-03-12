@@ -1,5 +1,7 @@
 <?php
 
+require_once '../db.php';
+
 error_reporting(0);
 
 header('Content-Type: application/json;charset=utf-8');
@@ -52,7 +54,8 @@ function validateData($registry, $ingress, $egrees, $stock, $logo)
 }
 
 if (validateData($registry, $ingress, $egrees, $stock, $logo)) {
-    $conn = new mysqli('localhost', 'root', '', 'empaque');
+    // $conn = new mysqli('localhost', 'root', '', 'empaque');
+    $conn = getMysqliConection();
     $conn->set_charset('utf8');
 
     if ($conn->connect_errno) {

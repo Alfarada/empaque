@@ -1,10 +1,12 @@
 <?php
 
+require_once '../db.php';
+
 error_reporting(0);
 
 header('Content-type: application/json;charset=utf-8');
 
-$conn = new mysqli('localhost', 'root', '', 'empaque');
+$conn = getMysqliConection();
 
 if ($conn->connect_errno) {
     $respuesta = [

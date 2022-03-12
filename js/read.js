@@ -13,6 +13,7 @@ export const getBoxesWithLogo = () => {
     url: "../api/BoxesWithLogo.php",
     success: (res) => {
 
+      console.log(res);
       
       if (localStorage.length === 0) {
         localStorage.setItem("with_out_logo", JSON.stringify(res));
@@ -54,6 +55,11 @@ export const getBoxesWithOutLogo = () => {
 }
 
 export const responseHandler = (res) => {
+
+  if (res === null) {
+    return console.error('No se está recibiendo una respuesta valida, NULL recibido.');
+  }
+  
   // if the response is an empty array
   if (res.length === 0) {
     return showNotice();

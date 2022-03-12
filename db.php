@@ -1,17 +1,6 @@
 <?php
 
-// class DB 
-// {
-//     private static $conn = null;
-//     private function __construct() {}
-
-//     public static function connect()
-//     {
-//         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-//         self::$conn = new PDO('mysql:host=localhost;dbname=empaque','root','',$pdo_options);
-//         return self::$conn;
-//     }
-// }
+require_once 'config.php';
 
 function getPDOConection()
 {
@@ -21,4 +10,11 @@ function getPDOConection()
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
+}
+
+function getMysqliConection()
+{   
+    // $conn = new mysqli('localhost', 'root', '', 'empaque');
+    return new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    // echo 'hola mundo';
 }

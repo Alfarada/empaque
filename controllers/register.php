@@ -50,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: login.php?message=Usuario registrado con exito.');
     }
 
+    $conn = null;
+
 }
 
 require_once '../views/register.php';

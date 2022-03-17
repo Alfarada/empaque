@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result !== false) {
         $_SESSION['email'] = $email;
+        $_SESSION['user_role'] = $result['user_role'];
         header('Location: content.php');
     } else {
         $errors .='Datos incorrectos'; 

@@ -28,19 +28,23 @@ export const renderTable = (res) => {
     $template.querySelector(".stock").textContent = stock;
     $template.querySelector(".logo").textContent = logo === 1 ? "si" : "no";
 
-    $template.querySelector(".edit").dataset.id = id;
-    $template.querySelector(".edit").dataset.registry = registry;
-    $template.querySelector(".edit").dataset.ingress = ingress;
-    $template.querySelector(".edit").dataset.egrees = egrees;
-    $template.querySelector(".edit").dataset.stock = stock;
-    $template.querySelector(".edit").dataset.logo = logo;
+    if ($template.querySelector(".edit") != null) {
+      $template.querySelector(".edit").dataset.id = id;
+      $template.querySelector(".edit").dataset.registry = registry;
+      $template.querySelector(".edit").dataset.ingress = ingress;
+      $template.querySelector(".edit").dataset.egrees = egrees;
+      $template.querySelector(".edit").dataset.stock = stock;
+      $template.querySelector(".edit").dataset.logo = logo;
+    }
 
-    $template.querySelector(".delete-icon").dataset.id = id;
-    $template.querySelector(".delete-icon").dataset.registry = registry;
-    $template.querySelector(".delete-icon").dataset.ingress = ingress;
-    $template.querySelector(".delete-icon").dataset.egrees = egrees;
-    $template.querySelector(".delete-icon").dataset.stock = stock;
-    $template.querySelector(".delete-icon").dataset.logo = logo;
+    if ($template.querySelector(".delete-icon") != null) {
+      $template.querySelector(".delete-icon").dataset.id = id;
+      $template.querySelector(".delete-icon").dataset.registry = registry;
+      $template.querySelector(".delete-icon").dataset.ingress = ingress;
+      $template.querySelector(".delete-icon").dataset.egrees = egrees;
+      $template.querySelector(".delete-icon").dataset.stock = stock;
+      $template.querySelector(".delete-icon").dataset.logo = logo;
+    }
 
     let $clone = d.importNode($template, true);
     $fragment.appendChild($clone);
@@ -62,10 +66,10 @@ const notifyStock = () => {
 const checkElements = ($tbody) => {
   if ($tbody.firstElementChild) {
     let $tr = $tbody.querySelector("tr"),
-    $stock = $tr.children[3].textContent;
+      $stock = $tr.children[3].textContent;
 
     // $form.stock.value = $stock; // set into form field stock
-    
+
     if ($stock < 5000) showNotice($stock);
   }
 };
@@ -78,7 +82,7 @@ const showNotice = ($stock) => {
 
   $h6.textContent = convertValue($stock);
 
-  $cardNotice.classList.add("orange");  // add color
+  $cardNotice.classList.add("orange"); // add color
   $cardNotice.classList.remove("hide"); // show card
 };
 

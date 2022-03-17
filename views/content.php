@@ -167,8 +167,14 @@
                     <td class="stock"></td>
                     <td class="logo"></td>
                     <td>
-                        <a href="#section1"><i class="small material-icons edit ">create</i></a>
-                        <a class="modal-trigger edit" href="#idModal"><i class="small material-icons delete-icon">delete</i></a>
+                        <?php if($_SESSION['user_role'] == 'admin'): ?>
+                            <a href="#section1"><i class="small material-icons edit ">create</i></a>
+                            <a class="modal-trigger edit" href="#idModal"><i class="small material-icons delete-icon">delete</i></a>
+                        <?php endif; ?>
+                        <?php //else : ?>
+                            <!-- <a href="#section1"><i class="small material-icons edit hide">create</i></a>
+                            <a class="modal-trigger edit hide" href="#idModal"><i class="small material-icons delete-icon">delete</i></a> -->
+                        <?php //endif; ?> 
                     </td>
                 </tr>
             </template>

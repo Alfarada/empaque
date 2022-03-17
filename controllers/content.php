@@ -10,6 +10,4 @@ if (isset($_SESSION['email'])) {
     header('Location: login.php');
 }
 
-// require '../views/content.php';
-
 ?>

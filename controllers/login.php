@@ -16,19 +16,19 @@ $errors = '';
 $conn = getPDOConection();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user = filter_var(strtolower($_POST['user']), FILTER_SANITIZE_STRING);
+    $email = filter_var(strtolower($_POST['email']), FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
     $password = hash('sha512',$password);
 
-    $stmt = $conn->prepare('SELECT * FROM users WHERE user = :user AND pass = :pass');
-    $stmt->execute(array(':user' => $user, ':pass' => $password));
+    $stmt = $conn->prepare('SELECT * FROM users WHERE email = :email AND pass = :pass');
+    $stmt->execute(array(':email' => $email, ':pass' => $password));
     $result = $stmt->fetch();
 
     if ($result !== false) {
-        $_SESSION['user'] = $user;
+        $_SESSION['email'] = $email;
         header('Location: content.php');
     } else {
-        $errors .='Datos incorrectos.'; 
+        $errors .='Datos incorrectos'; 
     }
 
     $conn = null;

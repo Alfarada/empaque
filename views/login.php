@@ -23,8 +23,8 @@
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="form" name="login">
                     <div class="input-field">
                         <i class="material-icons prefix">alternate_email</i>
-                        <label for="user">Nombre de usuario</label>
-                        <input type="text" id="user" name="user" class="user">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" class="user" aria-describedby="emailHelp">
                     </div>
                     <div class="input-field">
                         <i class="material-icons prefix">password</i>

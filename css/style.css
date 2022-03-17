@@ -75,9 +75,11 @@ section.section_table article:first-child p {
   /* margin-bottom: 3rem; */
 /* } */
 
-.errors ul > li {
-  font-weight: 500;
-  color: #f44336(250, 231, 231);
+.errors ul > li > p{
+  font-weight: 600;
+  font-size: large;
+  /* color: #f44336(250, 231, 231); */
+  color: red;
 }
 
 .container-login {

@@ -40,7 +40,11 @@
                     <?php if (!empty($errors)) : ?>
                         <div class="errors">
                             <ul>
-                                <?php echo $errors;  ?>
+                                <li>
+                                    <p>
+                                        <?php echo $errors;  ?>
+                                    </p>
+                                </li>
                             </ul>
                         </div>
                     <?php endif; ?>

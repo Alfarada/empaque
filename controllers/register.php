@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn = getPDOConection();
 
     if (empty($email) or empty($password) or empty($password2)) {
-        $errors .= '<li>Porfavor rellena los campos correctamente.</li>';
+        $errors .= 'Porfavor rellena los campos correctamente.';
     } else {
 
         $stmt = $conn->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
@@ -36,14 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // result != false | existe.
 
         if ($result != false) {
-            $errors .= '<li>El nombre de usuario ya existe.</li>';
+            $errors .= 'El nombre de usuario ya existe.';
         }
 
         $password  = hash('sha512', $password);
         $password2 = hash('sha512', $password2);
 
         if ($password !== $password2) {
-            $errors .= '<li>Las contraseñas deben ser iguales.</li>';
+            $errors .= 'Las contraseñas deben ser iguales.';
         }
     }
 

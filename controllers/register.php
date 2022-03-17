@@ -8,7 +8,7 @@ require_once '../config.php';
 
 session_start();
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['email'])) {
     // redirige...
     header('Location: ../index.php');
 }
@@ -17,26 +17,29 @@ if (isset($_SESSION['user'])) {
 // de la misma página con el metodo POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $user = filter_var(strtolower($_POST['user']), FILTER_SANITIZE_STRING);
+    $email = filter_var(strtolower($_POST['email']), FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
     $password2 = $_POST['password_2'];
 
     $errors = '';
     $conn = getPDOConection();
 
-    if (empty($user) or empty($password) or empty($password2) ) {
-        $errors .= '<li>Porfavor rellena los campos correctamente</li>';
+    if (empty($email) or empty($password) or empty($password2)) {
+        $errors .= '<li>Porfavor rellena los campos correctamente.</li>';
     } else {
 
-        $stmt = $conn->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
-        $stmt->execute(array(':user' => $user));
+        $stmt = $conn->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
+        $stmt->execute(array(':email' => $email));
         $result = $stmt->fetch();
+
+        // result = false  | no existe.
+        // result != false | existe.
 
         if ($result != false) {
             $errors .= '<li>El nombre de usuario ya existe.</li>';
         }
 
-        $password = hash('sha512', $password);
+        $password  = hash('sha512', $password);
         $password2 = hash('sha512', $password2);
 
         if ($password !== $password2) {
@@ -44,14 +47,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    $role = '';
+    $admin = 'bob@example.com';
+
     if ($errors == '') {
-        $stmt = $conn->prepare('INSERT INTO users (id, user, pass) VALUES (null, :user, :pass)');
-        $stmt->execute(array(':user' => $user, ':pass' => $password));
+
+        $sql = 'INSERT INTO users (id, email, pass, user_role) VALUES (null, :email, :pass, :user_role)';
+
+        if ($email == $admin) {
+            $role = 'admin';
+        } else {
+            $role = 'user';
+        }
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(
+            array(
+                ':email' => $email,
+                ':pass' => $password,
+                ':user_role' => $role
+            )
+        );
+
+        $con  = null;
+        $stmt = null;
+
         header('Location: login.php?message=Usuario registrado con exito.');
     }
 
     $conn = null;
-
 }
 
 require_once '../views/register.php';

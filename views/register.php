@@ -23,7 +23,7 @@
                     <div class="input-field">
                         <i class="material-icons prefix">alternate_email</i>
                         <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" class="user validate">
+                        <input type="email" id="email" name="email" class="user validate" aria-describedby="emailHelp">
                     </div>
                     <div class="input-field">
                         <i class="material-icons prefix">password</i>

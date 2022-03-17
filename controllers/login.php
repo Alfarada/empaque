@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user'] = $user;
         header('Location: content.php');
     } else {
-        $errors .='<li>Datos incorrectos</li>'; 
+        $errors .='Datos incorrectos.'; 
     }
 
     $conn = null;

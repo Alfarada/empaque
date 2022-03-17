@@ -22,12 +22,12 @@
                 <h4 class="grey-text">Inicio de Sesión</h4>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="form" name="login">
                     <div class="input-field">
-                        <i class="material-icons prefix">account_circle</i>
+                        <i class="material-icons prefix">alternate_email</i>
                         <label for="user">Nombre de usuario</label>
                         <input type="text" id="user" name="user" class="user">
                     </div>
                     <div class="input-field">
-                        <i class="material-icons prefix">lock</i>
+                        <i class="material-icons prefix">password</i>
                         <label for="password">Contraseña</label>
                         <input type="password" id="password" name="password" minlength="6" maxlength="12" class="password_btn">
                     </div>
@@ -44,7 +44,11 @@
                     <?php if (!empty($errors)) : ?>
                         <div class="errors">
                             <ul>
-                                <?php echo $errors; ?>
+                                <li>
+                                    <p>
+                                        <?php echo $errors;  ?>
+                                    </p>
+                                </li>
                             </ul>
                         </div>
                     <?php endif; ?>

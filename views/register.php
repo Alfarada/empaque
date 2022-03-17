@@ -21,17 +21,17 @@
                 <!-- Reenviando datos a la misma página -->
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="form" name="login">
                     <div class="input-field">
-                        <i class="material-icons prefix">account_circle</i>
-                        <label for="user">Nombre de usuario</label>
-                        <input type="text" id="user" name="user" class="user validate">
+                        <i class="material-icons prefix">alternate_email</i>
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" class="user validate">
                     </div>
                     <div class="input-field">
-                        <i class="material-icons prefix">lock</i>
+                        <i class="material-icons prefix">password</i>
                         <label for="password">Contraseña</label>
                         <input type="password" id="password" name="password" minlength="6" maxlength="12" class="password validate">
                     </div>
                     <div class="input-field">
-                        <i class="material-icons prefix">done_all</i>
+                        <i class="material-icons prefix">check</i>
                         <label for="password_2">Confirmar contraseña</label>
                         <input type="password" id="password_2" name="password_2" minlength="6" maxlength="12" class="password_btn">
                     </div>

@@ -76,7 +76,7 @@
                         </div>
                         <div class="input-field">
                             <label for="lot">Numero de lote</label>
-                            <input type="text" id="lot" class="lot" name="lot" minlength="1" maxlength="6" pattern="\d*" >
+                            <input type="text" id="lot" class=" validate lot" name="lot" value="0" minlength="1" maxlength="6" pattern="\d*" >
                         </div>
 
                         <div class="switch">

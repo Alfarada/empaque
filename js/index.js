@@ -195,6 +195,7 @@ document.addEventListener("click", (e) => {
     $form.id.value = "";
     $form.logo.value = 0;
     $form.logo.checked = false;
+    $form.lot.value = "";
 
     // hide button to cancel edit
     $formEditButton.classList.add("none");
@@ -202,14 +203,18 @@ document.addEventListener("click", (e) => {
 
   // if user press edit icon
   if (e.target.matches(".edit")) {
-    $h5.textContent = "Editar registro";
+
+    $h5.textContent          = "Editar registro";
     $form.submit.textContent = "Editar";
-    $form.id.value = e.target.dataset.id;
+
+    // console.log(e.target);
+
+    $form.id.value       = e.target.dataset.id; // imput id hidden
     $form.registry.value = e.target.dataset.registry;
-    $form.ingress.value = e.target.dataset.ingress;
-    $form.egrees.value = e.target.dataset.egrees;
-    $form.stock.value = e.target.dataset.stock;
-    // $form.stock.value = 0;
+    $form.ingress.value  = e.target.dataset.ingress;
+    $form.egrees.value   = e.target.dataset.egrees;
+    $form.stock.value    = e.target.dataset.stock;
+    $form.lot.value      = e.target.dataset.lot;
 
     if (e.target.dataset.logo == 0) {
       $form.logo.value = 0;

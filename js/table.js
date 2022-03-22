@@ -38,6 +38,7 @@ export const renderTable = (res) => {
       $template.querySelector(".edit").dataset.egrees = egrees;
       $template.querySelector(".edit").dataset.stock = stock;
       $template.querySelector(".edit").dataset.logo = logo;
+      $template.querySelector(".edit").dataset.lot = lot;
     }
 
     if ($template.querySelector(".delete-icon") != null) {

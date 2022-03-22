@@ -48,7 +48,7 @@ const getSubtraction = () => {
 
 const hasKeys = (data) => {
   if (data == null) {
-    return console.error(`hasKeys() espera recibir un array, recibe: ${null}`);
+    return console.error(`La funcion hasKeys() espera recibir un array, recibe: ${null}`);
   }
 
   return data.length !== 0;

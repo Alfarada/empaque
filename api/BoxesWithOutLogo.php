@@ -49,7 +49,8 @@ if ($conn->connect_errno) {
             'stock'      => $row['stock'],
             'logo'       => $row['logo'],
             'page'        => $page,
-            'numberpages' => $numberPages
+            'numberpages' => $numberPages,
+            'lot'         => $row['lot']
         ];
 
         array_push($response, $records);

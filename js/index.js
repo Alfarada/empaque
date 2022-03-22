@@ -109,11 +109,12 @@ document.addEventListener("submit", (e) => {
     $egrees = e.target.egrees.value.trim(),
     $stock = e.target.stock.value.trim(),
     $logo = e.target.logo.value.trim(),
+    $lot  = e.target.lot.value.trim(),
     $id = e.target.id.value.trim(),
     $form = document.querySelector(".crud_form"),
     $alert = document.querySelector(".alert-container");
 
-  let isItValid = validateInputs($ingress, $egrees, $stock, $logo, $registry);
+  let isItValid = validateInputs($ingress, $egrees, $stock, $logo, $registry, $lot);
 
   if (e.target === $form) {
     e.preventDefault();
@@ -133,7 +134,7 @@ document.addEventListener("submit", (e) => {
           error: (res) => {
             console.log(`Error al enviar los datos ${res}`);
           },
-          data: `ingress=${$ingress}&egrees=${$egrees}&stock=${$stock}&logo=${$logo}&registry=${$registry}`,
+          data: `ingress=${$ingress}&egrees=${$egrees}&stock=${$stock}&logo=${$logo}&registry=${$registry}&lot=${$lot}`,
         });
       } else {
         // TODO Crear un metodo manejador de mensajes de error y exito

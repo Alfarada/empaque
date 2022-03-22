@@ -20,13 +20,16 @@ export const renderTable = (res) => {
   clearAllChildElements("tbody");
 
   res.forEach((el) => {
-    let { registry, ingress, egrees, stock, logo, id } = el;
+    let { registry, ingress, egrees, stock, logo, id, lot } = el;
+
+    console.log(res,$template.querySelector(".lot"));
 
     $template.querySelector(".registry").textContent = registry;
     $template.querySelector(".ingress").textContent = ingress;
     $template.querySelector(".egrees").textContent = egrees;
     $template.querySelector(".stock").textContent = stock;
-    $template.querySelector(".logo").textContent = logo === 1 ? "si" : "no";
+    $template.querySelector(".lot").textContent = lot;
+    // $template.querySelector(".logo").textContent = logo === 1 ? "si" : "no";
 
     if ($template.querySelector(".edit") != null) {
       $template.querySelector(".edit").dataset.id = id;

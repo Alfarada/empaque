@@ -10,6 +10,7 @@ $registry   = $_POST['registry'];
 $ingress    = $_POST['ingress'];
 $egrees     = $_POST['egrees'];
 $stock      = $_POST['stock'];
+$lot        = $_POST['lot'];
 
 $logo = '';
 
@@ -36,25 +37,26 @@ function addCurrentTime($registry)
     return $registry;
 }
 
-function validateData($registry, $ingress, $egrees, $stock, $logo)
+function validateData($registry, $ingress, $egrees, $stock, $logo, $lot)
 {
     if ($ingress == '' || is_int($ingress)) {
         return false;
-    } elseif ($egrees == '' || is_int($ingress)) {
+    } elseif ($egrees == '' || is_int($egrees)) {
         return false;
-    } elseif ($stock  == '' || is_int($ingress)) {
+    } elseif ($stock  == '' || is_int($stock)) {
         return false;
-    } elseif ($logo   == '' || is_int($ingress)) {
+    } elseif ($logo   == '' || is_int($logo)) {
+        return false;
+    } elseif ($lot = '' || is_int($lot))  {
         return false;
     } elseif ($registry == '') {
         return false;
-    }
+    } 
 
     return true;
 }
 
-if (validateData($registry, $ingress, $egrees, $stock, $logo)) {
-    // $conn = new mysqli('localhost', 'root', '', 'empaque');
+if (validateData($registry, $ingress, $egrees, $stock, $logo, $lot)) {
     $conn = getMysqliConection();
     $conn->set_charset('utf8');
 
@@ -63,12 +65,12 @@ if (validateData($registry, $ingress, $egrees, $stock, $logo)) {
     } else {
 
         if ($logo == 1) {
-            $stmt = $conn->prepare("INSERT INTO with_logo_table (registry,ingress,egrees,stock,logo) VALUES (?,?,?,?,?)");
-            $stmt->bind_param('siiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo);
+            $stmt = $conn->prepare("INSERT INTO with_logo_table (registry,ingress,egrees,stock,logo,lot) VALUES (?,?,?,?,?,?)");
+            $stmt->bind_param('siiiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo, $lot);
             $stmt->execute();
         } else {
-            $stmt = $conn->prepare("INSERT INTO with_out_logo_table (registry,ingress,egrees,stock,logo) VALUES (?,?,?,?,?)");
-            $stmt->bind_param('siiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo);
+            $stmt = $conn->prepare("INSERT INTO with_out_logo_table (registry,ingress,egrees,stock,logo, lot) VALUES (?,?,?,?,?,?)");
+            $stmt->bind_param('siiiii', addCurrentTime($registry), $ingress, $egrees, $stock, $logo, $lot);
             $stmt->execute();
         }
 
@@ -93,6 +95,7 @@ if (validateData($registry, $ingress, $egrees, $stock, $logo)) {
         'egrees' => $egrees,
         'stock' => $stock,
         'logo' => $logo,
+        'lot' => $lot
     ];
 }
 

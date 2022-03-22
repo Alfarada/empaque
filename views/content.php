@@ -74,6 +74,10 @@
                             <label for="stock">Stock</label>
                             <input type="number" id="stock" class="validate stock" name="stock" readonly="readonly" value="0" maxlength="5">
                         </div>
+                        <div class="input-field">
+                            <label for="lot">Numero de lote</label>
+                            <input type="text" id="lot" class="lot" name="lot" minlength="1" maxlength="6" pattern="\d*" >
+                        </div>
 
                         <div class="switch">
                             <!-- <p class="logo-text">¿ Cajas con logo ?</p> -->
@@ -146,7 +150,7 @@
                                     <th scope="col">Ingreso</th>
                                     <th scope="col">Egreso</th>
                                     <th scope="col">Stock</th>
-                                    <th scope="col">Logo</th>
+                                    <th scope="col">N° lote</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -165,16 +169,13 @@
                     <td class="ingress"></td>
                     <td class="egrees"></td>
                     <td class="stock"></td>
-                    <td class="logo"></td>
+                    <td class="lot"></td>
+                    <!-- <td class="logo"></td> -->
                     <td>
                         <?php if($_SESSION['user_role'] == 'admin'): ?>
                             <a href="#section1"><i class="small material-icons edit ">create</i></a>
                             <a class="modal-trigger edit" href="#idModal"><i class="small material-icons delete-icon">delete</i></a>
                         <?php endif; ?>
-                        <?php //else : ?>
-                            <!-- <a href="#section1"><i class="small material-icons edit hide">create</i></a>
-                            <a class="modal-trigger edit hide" href="#idModal"><i class="small material-icons delete-icon">delete</i></a> -->
-                        <?php //endif; ?> 
                     </td>
                 </tr>
             </template>

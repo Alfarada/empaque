@@ -1,5 +1,5 @@
 // form inputs validation
-export const validateInputs = ($ingress, $egrees, $stock, $logo, $registry) => {
+export const validateInputs = ($ingress, $egrees, $stock, $logo, $registry, $lot) => {
   if ($ingress == "" || isNaN($ingress)) {
     return false;
   } else if ($egrees == "" || isNaN($egrees)) {
@@ -10,7 +10,9 @@ export const validateInputs = ($ingress, $egrees, $stock, $logo, $registry) => {
     return false;
   } else if ($registry == "") {
     return false;
-  } else if ($ingress == 0 && $egrees == 0 && $stock == 0) {
+  } else if ($lot == "" || isNaN($lot)) {
+    return false;
+  } else if ($ingress == 0 && $egrees == 0 && $stock == 0 && $lot == 0) {
     return false;
   }
 
